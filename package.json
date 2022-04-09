@@ -5,7 +5,7 @@
   "main": "index.js",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
-    "start": "set PORT=5000 && nodemon ./app.js"
+    "start": "PORT=9000 nodemon app.js"
   },
   "keywords": [],
   "author": "",
@@ -16,6 +16,8 @@
     "express-validator": "^6.14.0",
     "jsonwebtoken": "^8.5.1",
     "mongoose": "^6.2.6",
-    "morgan": "^1.10.0"
+    "morgan": "^1.10.0",
+    "nodemon": "^2.0.15",
+    "random-string": "^0.2.0"
   }
 }

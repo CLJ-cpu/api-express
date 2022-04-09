@@ -1,6 +1,6 @@
 const express = require('express')
 const morgan = require('morgan')
-// const cors = require('cors')
+const cors = require('cors')
 const router = require('./router')
 const errorHandler = require('./middleware/error-handler')
 require('./model')
@@ -14,10 +14,10 @@ router2.get('/api/dishes/list', (req, res) => {
    })
 })
 const app = express()
-app.all("*", (req, res, next)=> {
-   res.header("Access-Control-Allow-Origin", "*")
-   next()
-})
+// app.all("*", (req, res, next)=> {
+//    res.header("Access-Control-Allow-Origin", "*")
+//    next()
+// })
 app.use(morgan('dev'))
 
 app.use(express.json())//解析请求体

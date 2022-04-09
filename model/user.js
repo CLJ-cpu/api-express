@@ -1,31 +1,41 @@
-const mongoose = require('mongoose')
-const baseModel = require('./base-model')
-const md5 = require('../util/md5')
+const mongoose = require("mongoose");
+const baseModel = require("./base-model");
+const md5 = require("../util/md5");
+const random=require('string-random');
 const userSchema = new mongoose.Schema({
-   ...baseModel,
-   username: {
-      type: String,
-      required: true
-   },
-   email: {
-      type: String,
-      required: true
-   },
-   password: {
-      type: String,
-      required: true,
-      set: value => md5(value),
-      //查询时不带此字段
-      select:false
-   },
-   bio: {
-      type: String,
-      default: null
-   },
-   image: {
-      type: String,
-      default: null
-   }
-})
+  ...baseModel,
+  username: {
+    //用户名
+    type: String,
+    required:true, 
+    default:'user'+random(8)
+  },
+  email: {
+    //邮箱
+    type: String,
+    // required: true,
+  },
+  phone: {
+    //手机号
+    type: String,
+    required: true,
+  },
+  password: {
+    //密码
+    type: String,
+    required: true,
+    set: (value) => md5(value),
+    //查询时不带此字段
+    select: false,
+  },
+  bio: {
+    type: String,
+    default: null,
+  },
+  image: {
+    type: String,
+    default: null,
+  },
+});
 
-module.exports = userSchema
+module.exports = userSchema;

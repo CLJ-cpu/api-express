@@ -27,12 +27,12 @@ exports.register = validate([
 
 exports.login = [
    validate([
-      body('user.email').notEmpty().withMessage('邮箱不能为空'),
+      // body('user.email').notEmpty().withMessage('账号/邮箱不能为空'),
       body('user.password').notEmpty().withMessage('密码不能为空')
    ]),
    validate([
-      body('user.email').custom(async (email, { req }) => {
-         const user = await User.findOne({ email })
+      body('user.username').custom(async (username, { req }) => {
+         const user = await User.findOne({$or:[{ email:username },{phone:username}]})
          .select(['email','username','bio','image','password'])
          //手动搜索密码
          if (!user) {

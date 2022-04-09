@@ -15,7 +15,8 @@ exports.login = async (req, res, next) => {
       // 3.发送成功响应
       delete user.password
       res.status(200).json({
-         ...user,
+         success:true,
+         user,
          token
       })
    } catch (err) {
@@ -29,7 +30,6 @@ exports.register = async (req, res, next) => {
       //2.数据验证
       //2.1基本数据验证
       //2.2业务数据验证
-
       //3.验证通过，将数据保存到数据库中
       let user = new User(req.body.user)
 
