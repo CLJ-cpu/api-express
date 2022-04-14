@@ -1,7 +1,10 @@
 const mongoose = require("mongoose");
 const baseModel = require("./base-model");
 const md5 = require("../util/md5");
-const random=require('string-random');
+const random=require('random-string');
+const Schema = mongoose.Schema;
+const ObjectId = Schema.ObjectId;
+
 const userSchema = new mongoose.Schema({
   ...baseModel,
   username: {
@@ -36,6 +39,12 @@ const userSchema = new mongoose.Schema({
     type: String,
     default: null,
   },
+  hasStore:{
+    type: Boolean,
+    default: false,
+  },
+  store:
+    { type: ObjectId, ref: 'store' },
 });
 
 module.exports = userSchema;

@@ -10,7 +10,8 @@ router.post('/users/login', userValidator.login, userCtrl.login)
 router.post('/users', userValidator.register, userCtrl.register)
 
 //获取当前登录用户
-router.get('/user', auth, userCtrl.getCurrentUser)
+// router.get('/user', auth, userCtrl.getCurrentUser)
+router.get('/user', userCtrl.getCurrentUser)
 
 //更新当前用户
 router.put('/user', auth, userCtrl.updateCurrentUser)
