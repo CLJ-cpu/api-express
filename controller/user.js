@@ -1,4 +1,4 @@
-const { User } = require("../model");
+const { User, Store } = require("../model");
 const jwt = require("../util/jwt");
 const { jwtSecret } = require("../config/config.default");
 //用户登录
@@ -30,7 +30,9 @@ exports.register = async (req, res, next) => {
     //2.2业务数据验证
     //3.验证通过，将数据保存到数据库中
     let user = new User(req.body.user);
-
+    const store= await Store.create({});
+    console.log('store:'+store);
+    user.store=store;
     await user.save();
     user = user.toJSON();
     delete user.password;
@@ -38,7 +40,9 @@ exports.register = async (req, res, next) => {
       user,
     });
     //4.返回成功响应
-    res.send("register");
+    res.status(200).json({
+      user,
+    });
   } catch (err) {
     next(err);
   }
@@ -51,8 +55,11 @@ exports.getCurrentUser = async (req, res, next) => {
     if (query.phone) {
       condition.phone = query.phone;
     }
+    if(query._id){
+      condition._id = query._id;
+    }
     console.log(condition);
-    const user = await User.findOne(condition);
+    const user = await User.findOne(condition).populate({ path: "store" });
     res.status(200).json({
       user,
     });
@@ -64,6 +71,8 @@ exports.getCurrentUser = async (req, res, next) => {
 //更新用户
 exports.updateCurrentUser = async (req, res, next) => {
   try {
+    const query=req.query;
+    
     res.send("put /users");
   } catch (err) {
     next(err);

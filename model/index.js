@@ -17,10 +17,9 @@ db.once('open', function () {
    console.log('数据库连接成功')
 })
 
-
 //组织导出模型类
-
 module.exports = {
    User: mongoose.model('User', require('./user')),
-   Dish: mongoose.model('Dish', require('./dishes'))
+   Dish: mongoose.model('Dish', require('./dishes')),
+   Store:mongoose.model('Store',require('./store')),
 }

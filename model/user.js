@@ -39,12 +39,12 @@ const userSchema = new mongoose.Schema({
     type: String,
     default: null,
   },
-  hasStore:{
+  hasStore:{//店铺信息是否完善（完善后拥有店铺）
     type: Boolean,
     default: false,
   },
   store:
-    { type: ObjectId, ref: 'store' },
+    { type: ObjectId, ref: 'Store' },
 });
 
 module.exports = userSchema;

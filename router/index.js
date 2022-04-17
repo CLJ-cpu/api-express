@@ -7,6 +7,8 @@ router.use(require('./user'))
 router.use('/profiles', require('./profile'))
 //店铺菜单
 router.use(require('./dishes'))
+//店铺信息
+router.use(require('./store'))
 
 
 module.exports = router
